@@ -1,11 +1,14 @@
 const notesCtrl = {};
+const Note = require("../models/Note");
 
 notesCtrl.renderNoteForm = (req, res) => {
-    res.send("Note add");
+    res.render("notes/new-note");
 };
 
 notesCtrl.createNewNote = (req, res) => {
-    res.send("New note");
+    const { title, description } = req.body;
+    const newNote = new Note({ title, description });
+    res.send(newNote);
 };
 
 notesCtrl.renderNotes = (req, res) => {

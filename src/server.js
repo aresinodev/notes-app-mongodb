@@ -1,6 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
+const morgan = require("morgan");
 
 // Initializations
 const app = express();
@@ -17,6 +18,7 @@ app.engine(".hbs", exphbs({
 app.set("view engine", ".hbs");
 
 // Middlewares
+app.use(morgan("dev"));
 // Sirve para decirle que los datos que vengan de un formulario a una petición de cualquier tipo se trate como un JSON.
 app.use(express.urlencoded({ extended: false }));
 
