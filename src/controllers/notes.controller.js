@@ -10,7 +10,7 @@ notesCtrl.createNewNote = async (req, res) => {
     const newNote = new Note({ title, description });
     await newNote.save();
 
-    res.send(newNote);
+    res.redirect("/notes");
 };
 
 notesCtrl.renderNotes = async (req, res) => {
@@ -26,8 +26,9 @@ notesCtrl.updateNote = (req, res) => {
     res.send("Update note");
 };
 
-notesCtrl.deleteNote = (req, res) => {
-    res.send("Delete note");
+notesCtrl.deleteNote = async (req, res) => {
+    await Note.findByIdAndDelete(req.params.id);
+    res.redirect("/notes");
 }
 
 module.exports = notesCtrl;

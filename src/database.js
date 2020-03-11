@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const { NOTES_APP_MONGODB_HOST, NOTES_APP_MONGODB_DATABASE } = process.env;
-const MONGODB_URL = `mongodb://${NOTES_APP_MONGODB_HOST}/${NOTES_APP_MONGODB_DATABASE}`;
+// const MONGODB_URL = `mongodb://${NOTES_APP_MONGODB_HOST}/${NOTES_APP_MONGODB_DATABASE}`;
+const MONGODB_URL = `mongodb://127.0.0.1/notes`;
 
 mongoose.connect(MONGODB_URL, {
     useUnifiedTopology: true,
