@@ -3,6 +3,8 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const morgan = require("morgan");
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
+const session = require("express-session");
 
 // Initializations
 const app = express();
@@ -23,8 +25,18 @@ app.use(morgan("dev"));
 // Sirve para decirle que los datos que vengan de un formulario a una petición de cualquier tipo se trate como un JSON.
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
+app.use(session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(flash());
 
 // Global variables
+app.use((req, res, next) => {
+    res.locals.successMsg = req.flash("success_msg");
+    next();
+});
 
 // Routes
 app.use(require("./routes/index.routes"));
